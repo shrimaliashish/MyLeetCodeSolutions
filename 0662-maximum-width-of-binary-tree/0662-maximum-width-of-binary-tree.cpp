@@ -11,46 +11,31 @@
  */
 class Solution {
 public:
+    
     int widthOfBinaryTree(TreeNode* root) {
-        if(root == NULL)
-            return 0;
-        
-        int res = 1;
-        queue<pair<TreeNode*, int>> q;
-        
-        // I am using intialising list
-        q.push({root, 0});      // also can use make_pair
-        
-        while(!q.empty())
-        {
-            int cnt = q.size();
-            // start is the index of root node for first level
-            int start = q.front().second;
-            int end = q.back().second;
-            
-            res = max(res,end-start + 1);
-            
-            for(int i = 0; i <cnt; ++i)
-            {
-                pair<TreeNode*, int> p = q.front();
-                // we will use it while inserting it children
-                // left child will be 2 * idx + 1;
-                // right chils will be 2 * idx + 2;
-                int idx = p.second - start;
-                
+        queue<pair<TreeNode*,long long int>>q;
+        q.push({root,1});
+        long long int mx=0;
+        while(!q.empty()){
+            int sz=q.size();
+            vector<pair<TreeNode*,long long int>>v;
+            int mn=q.front().second;
+            for(int i=0;i<sz;i++){
+                pair<TreeNode*,int>p=q.front();
+                TreeNode* temp=q.front().first;
+                long long int j=p.second-mn;
+                if(temp==root)
+                    j=1;
                 q.pop();
-                
-                // if  left child exist
-                if(p.first->left != NULL)
-                    q.push({p.first->left, (long long)2 * idx + 1});
-                
-                // if right child exist
-                if(p.first->right != NULL)
-                    q.push({p.first->right, (long long) 2 * idx + 2});
+                v.push_back(p);
+                if(temp->left)
+                    q.push({temp->left,j*2});
+                 if(temp->right)
+                    q.push({temp->right,j*2+1});
             }
+
+            mx=max(v[sz-1].second-v[0].second+1,mx);
         }
-        
-        return res;
-        
+        return mx;
     }
 };
