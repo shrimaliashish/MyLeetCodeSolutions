@@ -22,16 +22,11 @@ public:
     void dfs(TreeNode* node){
         if(node==NULL)
             return ;
-        int left=0,right=0;
-        if(node->left)
-        left=height(node->left);
-        if(node->right)
-            right=height(node->right);
+        int left=height(node->left);
+        int right=height(node->right);
         mx=max(right+left-1,mx);
-        if(node->left)
-            dfs(node->left);
-        if(node->right)
-            dfs(node->right);
+        dfs(node->left);
+        dfs(node->right);
     }
     int diameterOfBinaryTree(TreeNode* root) {
             dfs(root);
