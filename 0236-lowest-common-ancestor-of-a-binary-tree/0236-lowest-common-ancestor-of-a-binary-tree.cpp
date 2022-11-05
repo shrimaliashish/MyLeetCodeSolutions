@@ -10,7 +10,8 @@
 class Solution {
 public:
     TreeNode* dfs(TreeNode* root, TreeNode* p, TreeNode* q){
-      if(!root)return NULL;
+        if(!root)
+            return NULL;
         root->left=dfs(root->left,p,q);
         root->right=dfs(root->right,p,q);
         if(root==p || root==q)
