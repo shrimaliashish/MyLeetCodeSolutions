@@ -20,7 +20,6 @@ public:
         if(rotten==0)
             return -1;
         
-        
         while(!q.empty()){
             int sz=q.size();
             for(int i=0;i<sz;i++){
@@ -45,7 +44,7 @@ public:
                     grid[x][y+1]=2;
                 }
             }
-            if(!q.empty())
+            // if(!q.empty())
               cnt++;
         }
         for(int i=0;i<n;i++){
@@ -54,6 +53,6 @@ public:
                     return -1;
             }
         }
-        return cnt;
+        return cnt-1;
     }
 };
