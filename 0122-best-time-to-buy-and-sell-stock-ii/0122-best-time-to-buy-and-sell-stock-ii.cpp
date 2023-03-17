@@ -1,7 +1,6 @@
 class Solution {
 public:
-    vector<vector<int>>dp;
-    int fun(int i,int buy,vector<int>&p){
+    int fun(int i,int buy,vector<int>&p, vector<vector<int>>&dp){
         if(i==p.size()){
             return 0;
         }
@@ -9,18 +8,16 @@ public:
             return dp[i][buy];
         int profit=0;
         if(buy){
-            profit=max(-p[i]+fun(i+1,0,p),fun(i+1,1,p));
+            profit=max(-p[i]+fun(i+1,0,p,dp),fun(i+1,1,p,dp));
         }else{
-            profit=max(+p[i]+fun(i+1,1,p),fun(i+1,0,p));
+            profit=max(+p[i]+fun(i+1,1,p,dp),fun(i+1,0,p,dp));
         }
         return  dp[i][buy]= profit;
     }
     
-    // int fun(vector<int>p,)
-    
     int maxProfit(vector<int>& p) {
-        dp=vector<vector<int>>(p.size(),vector<int>(2,-1));
-        return fun(0,1,p);
+        vector<vector<int>>dp(p.size(),vector<int>(2,-1));
+        return fun(0,1,p,dp);
         
     }
 };
