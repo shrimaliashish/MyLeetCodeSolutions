@@ -8,7 +8,8 @@ public:
         int take=0;
         if(nums1[i]==nums2[j])
             take=1+fun(i+1,j+1,nums1,nums2,dp);
-        int notTake=max(fun(i,j+1,nums1,nums2,dp),fun(i+1,j,nums1,nums2,dp));
+        fun(i,j+1,nums1,nums2,dp);
+        fun(i+1,j,nums1,nums2,dp);
         
         if(nums1[i]==nums2[j])dp[i][j]=take;
         else dp[i][j]=0;
