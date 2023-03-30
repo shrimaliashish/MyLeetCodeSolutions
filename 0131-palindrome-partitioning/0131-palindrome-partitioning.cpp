@@ -1,34 +1,59 @@
 class Solution {
 public:
-    bool check(string str){
+    vector<vector<string>>ans;
+    bool isPalindrome(string str){
         string rev=str;
         reverse(rev.begin(),rev.end());
-        return rev==str;
+        return str==rev;
     }
-    void find(int i,int j,string s,vector<vector<string>>&ans,vector<string>&ds)
-    {  
-        int n=s.size();
-        if(j==n){
-            int sz=0;
-            for(auto x:ds){
-                sz+=x.size();
-            }
-            if(sz==n)
+//     void partition(int i,int j,string str,vector<string>&ds){
+//         int n=str.size();
+//         if(i==j && j==n-1){
+//             // string temp;
+//             // temp.push_back(str[i]);
+//             // ds.push_back(temp);
+//             int sz=0;
+//             for(auto x:ds){
+//                 sz+=x.size();
+//             }
+//             if(sz==n)
+//             ans.push_back(ds);
+//             return;
+//         }
+//         if(i>=j)
+//             return;
+        
+//         for(int k=i;k<j;k++){
+//             string temp=str.substr(i,k-i+1);
+//             if(isPalindrome(temp)){
+//                 ds.push_back(temp);
+//                 partition(i,k,str,ds);
+//                 partition(k+1,j,str,ds);
+//                 ds.pop_back();
+//             }
+//         }
+        
+//     }
+    void partition(int ind,string & str,vector<string>&ds){
+        int n=str.size();
+        if(ind==n){
             ans.push_back(ds);
             return;
         }
-        string temp=s.substr(i,j-i+1);
-        if(check(temp)){
-            ds.push_back(temp);
-            find(j+1,j+1,s,ans,ds);
-            ds.pop_back();
+        for(int i=ind;i<n;i++){
+            string temp=str.substr(ind,i-ind+1);
+            if(isPalindrome(temp)){
+                ds.push_back(temp);
+                partition(i+1,str,ds);
+                ds.pop_back();
+            }
         }
-        find(i,j+1,s,ans,ds);
+            
     }
     vector<vector<string>> partition(string s) {
-        vector<vector<string>>ans;
         vector<string>ds;
-        find(0,0,s,ans,ds);
+        // partition(0,s.size()-1,s,ds);
+        partition(0,s,ds);
         return ans;
     }
 };
