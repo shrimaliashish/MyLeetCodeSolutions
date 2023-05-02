@@ -39,12 +39,12 @@ class Solution {
             int sz=q.size();
             int temp=q.front();
                 q.pop();
-                // vis[temp]=1;
+                vis[temp]=1;
                 for(auto child:adj[temp]){
                     if(vis[child] && child!=parent[temp])
                     return true;
                     else if(!vis[child]) {
-                        vis[child]=1;
+                        // vis[child]=1;
                         parent[child]=temp;
                         q.push(child);
                     }
