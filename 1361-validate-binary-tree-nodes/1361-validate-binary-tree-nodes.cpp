@@ -9,10 +9,10 @@ public:
         return false;
     } 
     bool validateBinaryTreeNodes(int n, vector<int>& leftChild, vector<int>& rightChild) {
-        vector<int> in(n), out(n);
+        vector<int> in(n);
         for(int i=0; i<n; i++) {
-            if(leftChild[i] != -1) in[leftChild[i]]++, out[i]++;
-            if(rightChild[i] != -1) in[rightChild[i]]++, out[i]++;
+            if(leftChild[i] != -1) in[leftChild[i]]++;
+            if(rightChild[i] != -1) in[rightChild[i]]++;
         }
 
         int root = -1;
